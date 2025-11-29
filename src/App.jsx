@@ -1,612 +1,1425 @@
 import React, { useState } from 'react';
+
 import { 
+
   Stethoscope, 
+
   Video, 
+
   MapPin, 
+
   Search, 
+
   Calendar, 
+
   Star, 
+
   CheckCircle, 
+
   ChevronRight, 
+
   ShieldCheck, 
+
   Activity, 
-  Beaker, 
+
   User, 
+
   Menu,
+
   X,
+
   Phone,
+
   Clock,
+
   Brain,
+
   Heart,
+
   Eye,
-  Bone
+
+  Bone,
+
+  ArrowRight,
+
+  Baby,
+
+  Microscope,
+
+  Dna
+
 } from 'lucide-react';
 
-// --- DATA: DUMMY DOCTORS & TESTS ---
 
-const doctors = [
-  {
-    id: 1,
-    name: "Dr. S. van der Meer",
-    title: "Neuroloog",
-    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400&h=400",
-    specialties: ["Migraine", "Hernia", "Duizeligheid"],
-    rating: 4.9,
-    reviews: 124,
-    big: "19023456789",
-    location: "Medisch Centrum Amstelveen",
-    priceVideo: 120,
-    pricePoli: 165,
-    nextSlot: "Vandaag, 14:00",
-    bio: "Als neuroloog focus ik mij op snelle diagnostiek bij onbegrepen hoofdpijnklachten. Ik luister naar uw verhaal en kijk verder dan de standaardprotocollen."
-  },
-  {
-    id: 2,
-    name: "Dr. J. de Vries",
-    title: "Cardioloog",
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400",
-    specialties: ["Hartritmestoornissen", "Preventieve screening", "Hoge bloeddruk"],
-    rating: 4.8,
-    reviews: 89,
-    big: "49023411234",
-    location: "Kliniek Oud-Zuid",
-    priceVideo: 130,
-    pricePoli: 180,
-    nextSlot: "Morgen, 09:30",
-    bio: "Preventie is beter dan genezen. Ik help u inzicht te krijgen in uw hartgezondheid met moderne technieken."
-  },
-  {
-    id: 3,
-    name: "Dr. E. Bakker",
-    title: "Dermatoloog",
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=400&h=400",
-    specialties: ["Eczeem", "Moedervlek check", "Acne"],
-    rating: 4.7,
-    reviews: 210,
-    big: "29099887766",
-    location: "Huidcentrum Utrecht",
-    priceVideo: 95,
-    pricePoli: 140,
-    nextSlot: "Vandaag, 16:15",
-    bio: "Een gezonde huid geeft zelfvertrouwen. Samen zoeken we naar de beste behandeling voor uw huidtype."
-  },
-  {
+
+// --- DATA: DOCTORS & TESTS ---
+
+
+
+// Uniforme stijl: Witte jassen, lichte achtergrond, professionele studio-look.
+
+
+
+const triageDoctor = {
+
     id: 4,
+
     name: "Drs. M. Jansen",
-    title: "Algemeen Arts (Triage)",
-    image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=400&h=400",
+
+    title: "Huisarts & Triage Specialist",
+
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600&h=600",
+
     specialties: ["Algemene klachten", "Second opinion", "Doorverwijzing"],
+
     rating: 4.9,
+
     reviews: 432,
+
     big: "69011223344",
+
     location: "Online",
+
     priceVideo: 45,
+
     pricePoli: null,
+
     nextSlot: "Direct beschikbaar",
-    bio: "Weet u niet zeker welke specialist u nodig heeft? Ik help u met een eerste analyse en verwijs u direct door."
+
+    bio: "Weet u niet zeker welke specialist u nodig heeft? Als triage-arts luister ik naar uw verhaal, analyseer ik uw symptomen en zorg ik dat u direct bij de juiste specialist terechtkomt. Geen onnodige wachttijden."
+
+};
+
+
+
+const specialists = [
+
+  {
+
+    id: 1,
+
+    name: "Dr. S. van der Meer",
+
+    title: "Neuroloog",
+
+    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=600&h=600",
+
+    specialties: ["Migraine", "Hernia", "Duizeligheid"],
+
+    rating: 4.9,
+
+    reviews: 124,
+
+    big: "19023456789",
+
+    location: "Medisch Centrum Amstelveen",
+
+    priceVideo: 120,
+
+    pricePoli: 165,
+
+    nextSlot: "Vandaag, 14:00",
+
+    bio: "Als neuroloog focus ik mij op snelle diagnostiek bij onbegrepen hoofdpijnklachten. Ik luister naar uw verhaal en kijk verder dan de standaardprotocollen."
+
+  },
+
+  {
+
+    id: 2,
+
+    name: "Dr. J. de Vries",
+
+    title: "Cardioloog",
+
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600&h=600",
+
+    specialties: ["Hartritmestoornissen", "Preventieve screening", "Hoge bloeddruk"],
+
+    rating: 4.8,
+
+    reviews: 89,
+
+    big: "49023411234",
+
+    location: "Kliniek Oud-Zuid",
+
+    priceVideo: 130,
+
+    pricePoli: 180,
+
+    nextSlot: "Morgen, 09:30",
+
+    bio: "Preventie is beter dan genezen. Ik help u inzicht te krijgen in uw hartgezondheid met moderne technieken."
+
+  },
+
+  {
+
+    id: 3,
+
+    name: "Dr. E. Bakker",
+
+    title: "Dermatoloog",
+
+    image: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&q=80&w=600&h=600",
+
+    specialties: ["Eczeem", "Moedervlek check", "Acne"],
+
+    rating: 4.7,
+
+    reviews: 210,
+
+    big: "29099887766",
+
+    location: "Huidcentrum Utrecht",
+
+    priceVideo: 95,
+
+    pricePoli: 140,
+
+    nextSlot: "Vandaag, 16:15",
+
+    bio: "Een gezonde huid geeft zelfvertrouwen. Samen zoeken we naar de beste behandeling voor uw huidtype."
+
+  },
+
+  {
+
+    id: 5,
+
+    name: "Dr. L. van den Berg",
+
+    title: "Orthopeed",
+
+    image: "https://images.unsplash.com/photo-1612531386530-97286d97c2d2?auto=format&fit=crop&q=80&w=600&h=600",
+
+    specialties: ["Sportblessures", "Knieklachten", "Schouder"],
+
+    rating: 4.9,
+
+    reviews: 156,
+
+    big: "39045678901",
+
+    location: "Orthopedie Centrum",
+
+    priceVideo: 110,
+
+    pricePoli: 150,
+
+    nextSlot: "Morgen, 11:00",
+
+    bio: "Bewegen zonder pijn is mijn missie. Of u nu topsporter bent of gewoon lekker wilt wandelen."
+
+  },
+
+  {
+
+    id: 6,
+
+    name: "Dr. F. Hendriks",
+
+    title: "KNO-Arts",
+
+    image: "https://images.unsplash.com/photo-1651008325513-37603395d852?auto=format&fit=crop&q=80&w=600&h=600",
+
+    specialties: ["Tinnitus", "Slaapapneu", "Holteontsteking"],
+
+    rating: 4.6,
+
+    reviews: 98,
+
+    big: "89056712345",
+
+    location: "Kliniek Hilversum",
+
+    priceVideo: 100,
+
+    pricePoli: 135,
+
+    nextSlot: "Vandaag, 15:30",
+
+    bio: "Problemen met horen of slapen hebben grote impact. Ik zoek samen met u naar een duurzame oplossing."
+
+  },
+
+  {
+
+    id: 7,
+
+    name: "Dr. A. Willems",
+
+    title: "Gynaecoloog",
+
+    image: "https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?auto=format&fit=crop&q=80&w=600&h=600",
+
+    specialties: ["Hormonale klachten", "Overgang", "Vruchtbaarheid"],
+
+    rating: 5.0,
+
+    reviews: 312,
+
+    big: "59067823456",
+
+    location: "Vrouwenzorg Amsterdam",
+
+    priceVideo: 125,
+
+    pricePoli: 175,
+
+    nextSlot: "Overmorgen, 10:00",
+
+    bio: "Vrouwspecifieke zorg met aandacht en tijd. Geen taboes, maar heldere medische antwoorden."
+
   }
+
 ];
+
+
 
 const labTests = [
+
   {
+
     id: 1,
+
     title: "Algemeen Bloedbeeld XL",
+
     price: 89,
-    desc: "Complete check van 25 waarden inclusief nier- en leverfunctie.",
-    image: "https://images.unsplash.com/photo-1579165466741-7f35a4755657?auto=format&fit=crop&q=80&w=500"
+
+    desc: "Complete check van 25 waarden inclusief nier- en leverfunctie en bloedsuiker.",
+
+    image: "https://images.unsplash.com/photo-1579165466741-7f35a4755657?auto=format&fit=crop&q=80&w=600"
+
   },
+
   {
+
     id: 2,
+
     title: "Vitamine & Mineralen",
+
     price: 65,
-    desc: "Check op o.a. Vitamine D, B12, IJzer en Magnesium.",
-    image: "https://images.unsplash.com/photo-1600091392652-32b5d4df4d2d?auto=format&fit=crop&q=80&w=500"
+
+    desc: "Essentieel bij vermoeidheid. Check op o.a. Vitamine D, B12, IJzer en Magnesium.",
+
+    image: "https://images.unsplash.com/photo-1600091392652-32b5d4df4d2d?auto=format&fit=crop&q=80&w=600"
+
   },
+
   {
+
     id: 3,
-    title: "Cholesterol Profiel",
+
+    title: "Cholesterol & Hart",
+
     price: 49,
-    desc: "Inzicht in uw HDL, LDL en triglyceriden gehalte.",
-    image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&q=80&w=500"
+
+    desc: "Inzicht in uw risicoprofiel. HDL, LDL, triglyceriden en glucose.",
+
+    image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&q=80&w=600"
+
+  },
+
+  {
+
+    id: 4,
+
+    title: "Hormoonbalans Vrouw",
+
+    price: 110,
+
+    desc: "Uitgebreide screening op o.a. Oestrogeen, Progesteron, FSH en LH.",
+
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600"
+
+  },
+
+  {
+
+    id: 5,
+
+    title: "SOA Test Compleet",
+
+    price: 75,
+
+    desc: "Volledig anonieme thuistest voor Chlamydia, Gonorroe en Syfilis.",
+
+    image: "https://images.unsplash.com/photo-1584036561566-b93a945c3e16?auto=format&fit=crop&q=80&w=600"
+
+  },
+
+  {
+
+    id: 6,
+
+    title: "Allergie Screening",
+
+    price: 95,
+
+    desc: "Test op de 30 meest voorkomende allergenen (pollen, huisdieren, voeding).",
+
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=600"
+
   }
+
 ];
+
+
+
+const locations = [
+
+  { city: "Amsterdam", x: 40, y: 35 },
+
+  { city: "Rotterdam", x: 30, y: 55 },
+
+  { city: "Utrecht", x: 45, y: 48 },
+
+  { city: "Groningen", x: 70, y: 15 },
+
+  { city: "Eindhoven", x: 50, y: 75 },
+
+  { city: "Zwolle", x: 60, y: 35 },
+
+  { city: "Maastricht", x: 55, y: 90 },
+
+  { city: "Den Haag", x: 25, y: 50 }
+
+];
+
+
 
 // --- COMPONENTS ---
 
+
+
 const Navigation = ({ setPage }) => {
+
   const [isOpen, setIsOpen] = useState(false);
 
+
+
   return (
-    <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
+
+    <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         <div className="flex justify-between h-20">
+
           <div className="flex items-center cursor-pointer" onClick={() => setPage('home')}>
-            <div className="bg-blue-900 text-white p-2 rounded-lg mr-3">
-              <Stethoscope size={24} />
+
+            <div className="text-slate-900 mr-2 bg-slate-50 p-2 rounded-lg">
+
+              <Stethoscope size={24} strokeWidth={2} />
+
             </div>
+
             <div>
-              <span className="font-bold text-xl text-slate-800 tracking-tight block">Prive-arts.nl</span>
-              <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Exclusieve Zorg</span>
+
+              <span className="font-semibold text-xl text-slate-900 tracking-tight block">prive-arts.nl</span>
+
             </div>
+
           </div>
+
           
+
           <div className="hidden md:flex items-center space-x-8">
-            <button onClick={() => setPage('home')} className="text-slate-600 hover:text-blue-900 font-medium">Home</button>
-            <button onClick={() => setPage('specialists')} className="text-slate-600 hover:text-blue-900 font-medium">Specialisten</button>
-            <button onClick={() => setPage('tests')} className="text-slate-600 hover:text-blue-900 font-medium">Onderzoek & Lab</button>
-            <button className="text-slate-600 hover:text-blue-900 font-medium">Over ons</button>
-            <button className="bg-blue-900 text-white px-5 py-2.5 rounded-full font-medium hover:bg-blue-800 transition shadow-lg shadow-blue-900/20">
-              Inloggen
+
+            <button onClick={() => setPage('home')} className="text-slate-600 hover:text-slate-900 font-medium text-sm">Home</button>
+
+            <button onClick={() => setPage('specialists')} className="text-slate-600 hover:text-slate-900 font-medium text-sm">Specialisten</button>
+
+            <button onClick={() => setPage('tests')} className="text-slate-600 hover:text-slate-900 font-medium text-sm">Onderzoek</button>
+
+            <button className="bg-slate-900 text-white px-6 py-2 rounded-md font-medium text-sm hover:bg-slate-800 transition shadow-lg shadow-slate-900/10">
+
+              Mijn Dossier
+
             </button>
+
           </div>
+
+
 
           <div className="flex items-center md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-slate-600">
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+
+            <button onClick={() => setIsOpen(!isOpen)} className="text-slate-900">
+
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+
             </button>
+
           </div>
+
         </div>
+
       </div>
+
       {/* Mobile Menu */}
+
       {isOpen && (
+
         <div className="md:hidden bg-white border-t border-gray-100 p-4 space-y-4">
+
           <button onClick={() => {setPage('home'); setIsOpen(false)}} className="block w-full text-left py-2 font-medium text-slate-700">Home</button>
+
           <button onClick={() => {setPage('specialists'); setIsOpen(false)}} className="block w-full text-left py-2 font-medium text-slate-700">Specialisten</button>
+
           <button onClick={() => {setPage('tests'); setIsOpen(false)}} className="block w-full text-left py-2 font-medium text-slate-700">Onderzoek</button>
+
         </div>
+
       )}
+
     </nav>
+
   );
+
 };
 
-const Hero = ({ setPage }) => (
-  <div className="relative bg-slate-50 overflow-hidden">
-    <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10">
-      <div className="lg:w-2/3">
-        <div className="inline-flex items-center bg-white px-3 py-1 rounded-full border border-blue-100 shadow-sm mb-6">
-          <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-          <span className="text-xs font-semibold text-blue-900 tracking-wide uppercase">Geen wachtlijsten, direct contact</span>
-        </div>
-        <h1 className="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
-          Zorg op uw voorwaarden.<br/>
-          <span className="text-blue-900">Directe toegang tot specialisten.</span>
-        </h1>
-        <p className="text-xl text-slate-600 mb-10 max-w-2xl leading-relaxed">
-          Videobellen met een neuroloog, dermatoloog of internist wanneer het u uitkomt. 
-          Of bezoek direct de poli zonder verwijsbrief. Uw gezondheid wacht niet.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div 
-            onClick={() => setPage('specialists')}
-            className="group cursor-pointer bg-white p-6 rounded-2xl shadow-xl border border-gray-100 hover:border-blue-500 transition-all duration-300 w-full sm:w-1/2 flex items-start"
-          >
-            <div className="bg-blue-50 p-3 rounded-xl text-blue-600 mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-              <Search size={28} />
-            </div>
-            <div>
-              <h3 className="font-bold text-lg text-slate-900 mb-1">Ik zoek een specialist</h3>
-              <p className="text-sm text-slate-500">Kies zelf uw arts (bijv. Neuroloog) en boek direct.</p>
-            </div>
-          </div>
 
-          <div className="group cursor-pointer bg-blue-900 p-6 rounded-2xl shadow-xl shadow-blue-900/20 hover:bg-blue-800 transition-all duration-300 w-full sm:w-1/2 flex items-start">
-            <div className="bg-white/10 p-3 rounded-xl text-white mr-4">
-              <Stethoscope size={28} />
-            </div>
-            <div>
-              <h3 className="font-bold text-lg text-white mb-1">Ik weet het niet precies</h3>
-              <p className="text-sm text-blue-100">Start triage consult met onze algemene arts (€45).</p>
-            </div>
-          </div>
+
+const Hero = ({ onSelectTriage }) => (
+
+  <div className="bg-white py-20 border-b border-gray-100 relative overflow-hidden">
+
+    <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-50 -skew-x-12 opacity-50 z-0"></div>
+
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+
+      <h1 className="text-4xl md:text-6xl font-light text-slate-900 mb-6 tracking-tight">
+
+        Zorg op <span className="font-semibold text-blue-900">uw voorwaarden</span>.
+
+      </h1>
+
+      <p className="text-lg text-slate-500 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+
+        Direct toegang tot medisch specialisten en diagnostiek. <br/>
+
+        Zonder wachttijd. Video of poli.
+
+      </p>
+
+    </div>
+
+  </div>
+
+);
+
+
+
+const TriageSection = ({ onSelect }) => (
+
+  <div className="max-w-5xl mx-auto px-4 -mt-12 relative z-10 mb-20">
+
+    <div className="bg-slate-900 text-white rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+
+      <div className="md:w-2/5 relative h-64 md:h-auto group">
+
+        <img 
+
+          src={triageDoctor.image} 
+
+          alt="Triage Arts" 
+
+          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
+
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent md:bg-gradient-to-r" />
+
+        <div className="absolute bottom-6 left-6">
+
+           <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider mb-2 inline-block border border-white/10">
+
+             Eerste Aanspreekpunt
+
+           </span>
+
+           <h3 className="text-2xl font-semibold">{triageDoctor.name}</h3>
+
+           <p className="text-slate-300">{triageDoctor.title}</p>
+
         </div>
+
       </div>
+
+      <div className="md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
+
+        <h2 className="text-2xl font-light mb-4">Weet u niet zeker welke specialist u nodig heeft?</h2>
+
+        <p className="text-slate-300 mb-8 leading-relaxed font-light">
+
+          Begin met een triage-consult. Onze huisarts analyseert uw klachten en verwijst u direct door naar de juiste specialist binnen ons netwerk.
+
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4">
+
+          <button 
+
+            onClick={() => onSelect(triageDoctor)}
+
+            className="bg-white text-slate-900 px-6 py-3 rounded-md font-medium hover:bg-slate-100 transition flex items-center justify-center shadow-lg shadow-white/10"
+
+          >
+
+            Start Triage Consult (€45)
+
+            <ArrowRight size={18} className="ml-2" />
+
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
+
   </div>
+
 );
 
-const CategoryIcon = ({ icon: Icon, label, color }) => (
-  <div className="flex flex-col items-center cursor-pointer group">
-    <div className={`w-16 h-16 ${color} rounded-2xl flex items-center justify-center mb-3 shadow-md group-hover:scale-105 transition-transform duration-300`}>
-      <Icon size={32} className="text-white" />
-    </div>
-    <span className="font-medium text-slate-700">{label}</span>
+
+
+const CategoryIcon = ({ icon: Icon, label }) => (
+
+  <div className="flex items-center gap-3 px-6 py-4 rounded-lg border border-gray-100 bg-white hover:border-blue-200 hover:shadow-md transition-all cursor-pointer group w-full md:w-auto">
+
+    <Icon size={20} className="text-slate-400 group-hover:text-blue-600 transition-colors" />
+
+    <span className="font-medium text-slate-600 group-hover:text-slate-900">{label}</span>
+
   </div>
+
 );
+
+
 
 const Categories = () => (
-  <div className="py-16 bg-white">
+
+  <div className="py-12 bg-white border-b border-gray-100">
+
     <div className="max-w-7xl mx-auto px-4">
-      <div className="text-center mb-12">
-        <h2 className="text-2xl font-bold text-slate-900">Populaire Specialismen</h2>
+
+      <p className="text-center text-slate-400 text-sm uppercase tracking-widest font-medium mb-8">Direct naar een specialist</p>
+
+      <div className="flex flex-wrap justify-center gap-4">
+
+        <CategoryIcon icon={Heart} label="Cardiologie" />
+
+        <CategoryIcon icon={Brain} label="Neurologie" />
+
+        <CategoryIcon icon={Activity} label="Dermatologie" />
+
+        <CategoryIcon icon={Bone} label="Orthopedie" />
+
+        <CategoryIcon icon={Eye} label="Oogheelkunde" />
+
+        <CategoryIcon icon={Baby} label="Gynaecologie" />
+
       </div>
-      <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-        <CategoryIcon icon={Heart} label="Cardiologie" color="bg-rose-500" />
-        <CategoryIcon icon={Brain} label="Neurologie" color="bg-indigo-500" />
-        <CategoryIcon icon={Activity} label="Dermatologie" color="bg-amber-500" />
-        <CategoryIcon icon={Bone} label="Orthopedie" color="bg-emerald-500" />
-        <CategoryIcon icon={Eye} label="Oogheelkunde" color="bg-sky-500" />
-      </div>
+
     </div>
+
   </div>
+
 );
+
+
 
 const SpecialistCard = ({ doctor, onSelect }) => (
-  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
-    <div className="p-6 flex-1">
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center">
-          <img src={doctor.image} alt={doctor.name} className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md mr-4" />
-          <div>
-            <h3 className="font-bold text-slate-900 text-lg">{doctor.name}</h3>
-            <p className="text-blue-600 font-medium">{doctor.title}</p>
-          </div>
-        </div>
-        <div className="flex items-center bg-yellow-50 px-2 py-1 rounded-lg">
-          <Star size={14} className="text-yellow-500 mr-1" fill="currentColor" />
-          <span className="text-xs font-bold text-slate-700">{doctor.rating}</span>
-        </div>
+
+  <div className="group bg-white rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-500 border border-gray-100 flex flex-col h-full">
+
+    <div className="aspect-[4/3] overflow-hidden relative">
+
+      <img src={doctor.image} alt={doctor.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+
+        <span className="text-white font-medium flex items-center">Bekijk profiel <ArrowRight size={16} className="ml-2"/></span>
+
       </div>
+
+    </div>
+
+    
+
+    <div className="p-6 flex-grow flex flex-col">
+
+      <p className="text-blue-600 font-bold text-xs uppercase tracking-wider mb-2">{doctor.title}</p>
+
+      <h3 className="font-serif text-2xl text-slate-900 mb-2">{doctor.name}</h3>
+
       
-      <div className="mb-4">
-        <div className="flex flex-wrap gap-2">
-          {doctor.specialties.map((spec, i) => (
-            <span key={i} className="text-xs font-medium bg-slate-100 text-slate-600 px-2 py-1 rounded-md">
-              {spec}
-            </span>
-          ))}
-        </div>
+
+      <div className="flex items-center gap-4 text-sm text-slate-500 mb-6">
+
+         <span className="flex items-center"><MapPin size={14} className="mr-1"/> {doctor.location}</span>
+
+         <span className="flex items-center"><Star size={14} className="mr-1 text-slate-400"/> {doctor.rating}</span>
+
       </div>
 
-      <div className="space-y-2 text-sm text-slate-500 mb-4">
-        <div className="flex items-center">
-          <ShieldCheck size={16} className="text-green-500 mr-2" />
-          <span>BIG: {doctor.big}</span>
+
+
+      <div className="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center">
+
+        <div className="text-xs text-slate-400">
+
+          Eerstvolgende plek:<br/>
+
+          <span className="text-slate-700 font-medium">{doctor.nextSlot}</span>
+
         </div>
-        <div className="flex items-center">
-          <Clock size={16} className="text-blue-500 mr-2" />
-          <span>Eerstvolgende: <span className="text-slate-900 font-medium">{doctor.nextSlot}</span></span>
-        </div>
+
+        <button 
+
+          onClick={() => onSelect(doctor)}
+
+          className="bg-slate-50 text-slate-900 px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-100 transition"
+
+        >
+
+          Afspraak maken
+
+        </button>
+
       </div>
+
     </div>
 
-    <div className="bg-slate-50 p-4 border-t border-gray-100 flex gap-3">
-      <button 
-        onClick={() => onSelect(doctor)}
-        className="flex-1 bg-white border border-slate-200 text-slate-700 py-2 rounded-lg font-medium hover:bg-slate-50 transition text-sm flex items-center justify-center"
-      >
-        <User size={16} className="mr-2" />
-        Profiel
-      </button>
-      <button 
-        onClick={() => onSelect(doctor)}
-        className="flex-1 bg-blue-900 text-white py-2 rounded-lg font-medium hover:bg-blue-800 transition text-sm flex items-center justify-center"
-      >
-        <Calendar size={16} className="mr-2" />
-        Boeken
-      </button>
-    </div>
   </div>
+
 );
+
+
 
 const DoctorProfile = ({ doctor, onBack }) => {
+
   const [bookingType, setBookingType] = useState('video');
 
+
+
   return (
-    <div className="bg-slate-50 min-h-screen pb-20">
+
+    <div className="bg-white min-h-screen pb-20">
+
       {/* Breadcrumb */}
-      <div className="bg-white border-b border-gray-200">
+
+      <div className="border-b border-gray-100 sticky top-20 bg-white/80 backdrop-blur-md z-40">
+
         <div className="max-w-7xl mx-auto px-4 py-4">
-          <button onClick={onBack} className="flex items-center text-slate-500 hover:text-blue-900 transition">
-            <ChevronRight className="rotate-180 mr-1" size={20} />
+
+          <button onClick={onBack} className="flex items-center text-sm text-slate-500 hover:text-slate-900 transition">
+
+            <ChevronRight className="rotate-180 mr-1" size={16} />
+
             Terug naar overzicht
+
           </button>
+
         </div>
+
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 mt-8 flex flex-col lg:flex-row gap-8">
+
+
+      <div className="max-w-7xl mx-auto px-4 mt-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+
         
+
         {/* Left Column: Profile Info */}
-        <div className="flex-1">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
-            <div className="flex flex-col md:flex-row gap-6 items-start">
-              <img src={doctor.image} className="w-32 h-32 rounded-2xl object-cover shadow-lg" alt={doctor.name} />
-              <div>
-                <h1 className="text-3xl font-bold text-slate-900 mb-1">{doctor.name}</h1>
-                <p className="text-xl text-blue-600 font-medium mb-3">{doctor.title}</p>
-                <div className="flex items-center gap-4 text-sm text-slate-500 mb-4">
-                  <span className="flex items-center"><ShieldCheck size={16} className="text-green-500 mr-1"/> BIG Geregistreerd</span>
-                  <span className="flex items-center"><MapPin size={16} className="text-gray-400 mr-1"/> {doctor.location}</span>
-                  <span className="flex items-center"><Star size={16} className="text-yellow-400 mr-1"/> {doctor.rating} ({doctor.reviews} reviews)</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                   {doctor.specialties.map((tag, i) => (
-                     <span key={i} className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">{tag}</span>
-                   ))}
-                </div>
-              </div>
-            </div>
 
-            <hr className="my-8 border-gray-100" />
+        <div className="lg:col-span-7">
 
-            <div className="prose prose-slate">
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Over de specialist</h3>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                {doctor.bio}
-              </p>
+          <div className="flex flex-col sm:flex-row gap-8 items-start mb-12">
+
+            <img src={doctor.image} className="w-32 h-32 sm:w-48 sm:h-48 rounded-lg object-cover shadow-lg" alt={doctor.name} />
+
+            <div>
+
+              <span className="text-blue-600 font-bold tracking-wide uppercase text-sm">{doctor.title}</span>
+
+              <h1 className="text-4xl font-serif text-slate-900 mb-4 mt-1">{doctor.name}</h1>
+
               
-              <h3 className="text-lg font-bold text-slate-900 mb-3">Behandelingen</h3>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {['Second Opinion', 'Behandelplan opstellen', 'Medicatie review', 'Diagnostiek'].map((item, i) => (
-                  <li key={i} className="flex items-center text-slate-600">
-                    <CheckCircle size={16} className="text-green-500 mr-2" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500 mb-6">
+
+                <span className="flex items-center"><ShieldCheck size={16} className="text-slate-400 mr-2"/> BIG: {doctor.big}</span>
+
+                <span className="flex items-center"><MapPin size={16} className="text-slate-400 mr-2"/> {doctor.location}</span>
+
+              </div>
+
+              
+
+              <div className="flex flex-wrap gap-2">
+
+                 {doctor.specialties.map((tag, i) => (
+
+                   <span key={i} className="bg-slate-50 text-slate-600 px-3 py-1 rounded-full text-xs font-medium border border-slate-100">{tag}</span>
+
+                 ))}
+
+              </div>
+
             </div>
+
           </div>
-          
-          <div className="bg-blue-50 rounded-2xl p-6 border border-blue-100 flex items-start gap-4">
-             <div className="bg-white p-3 rounded-full shadow-sm text-blue-600">
-               <ShieldCheck size={24} />
-             </div>
-             <div>
-               <h4 className="font-bold text-blue-900">Privacy & Veiligheid</h4>
-               <p className="text-sm text-blue-800 mt-1">
-                 Uw gesprek vindt plaats via een beveiligde verbinding. Data wordt versleuteld opgeslagen volgens NEN 7510 normen.
-               </p>
-             </div>
+
+
+
+          <div className="prose prose-slate max-w-none">
+
+            <h3 className="text-xl font-medium text-slate-900 mb-4">Over de arts</h3>
+
+            <p className="text-lg text-slate-600 font-light leading-relaxed mb-8">
+
+              {doctor.bio}
+
+            </p>
+
+            
+
+            <h3 className="text-xl font-medium text-slate-900 mb-4">Specialisaties & Behandelingen</h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+
+              {['Second Opinion', 'Behandelplan opstellen', 'Medicatie review', 'Diagnostiek'].map((item, i) => (
+
+                <div key={i} className="flex items-center text-slate-600 p-4 bg-slate-50 rounded-lg">
+
+                  <CheckCircle size={18} className="text-slate-400 mr-3" />
+
+                  {item}
+
+                </div>
+
+              ))}
+
+            </div>
+
           </div>
+
         </div>
+
+
 
         {/* Right Column: Booking Widget */}
-        <div className="lg:w-96">
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden sticky top-24">
-            <div className="p-6 bg-slate-900 text-white">
-              <h3 className="font-bold text-lg">Maak een afspraak</h3>
-              <p className="text-slate-300 text-sm">Geen wachttijd, direct plek.</p>
-            </div>
-            
-            <div className="p-6">
-              {/* Type Selector */}
-              <div className="flex bg-slate-100 p-1 rounded-lg mb-6">
-                <button 
-                  onClick={() => setBookingType('video')}
-                  className={`flex-1 flex items-center justify-center py-2 text-sm font-medium rounded-md transition ${bookingType === 'video' ? 'bg-white text-blue-900 shadow-sm' : 'text-slate-500'}`}
-                >
-                  <Video size={16} className="mr-2" />
-                  Video
-                </button>
-                {doctor.pricePoli && (
-                  <button 
-                    onClick={() => setBookingType('poli')}
-                    className={`flex-1 flex items-center justify-center py-2 text-sm font-medium rounded-md transition ${bookingType === 'poli' ? 'bg-white text-blue-900 shadow-sm' : 'text-slate-500'}`}
-                  >
-                    <MapPin size={16} className="mr-2" />
-                    Poli
-                  </button>
-                )}
+
+        <div className="lg:col-span-5">
+
+          <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden sticky top-32">
+
+            <div className="p-6 bg-slate-900 text-white flex justify-between items-center">
+
+              <div>
+
+                 <h3 className="font-medium text-lg">Direct een afspraak</h3>
+
+                 <p className="text-slate-400 text-sm">Selecteer uw voorkeur</p>
+
               </div>
 
-              {/* Price */}
-              <div className="flex justify-between items-center mb-6">
-                <span className="text-slate-600">Tarief (20 min)</span>
-                <span className="text-2xl font-bold text-slate-900">
-                  € {bookingType === 'video' ? doctor.priceVideo : doctor.pricePoli},00
-                </span>
+              <div className="h-10 w-10 bg-white/10 rounded-full flex items-center justify-center">
+
+                <Calendar size={20} />
+
               </div>
+
+            </div>
+
+            
+
+            <div className="p-8">
+
+              {/* Type Selector */}
+
+              <div className="flex gap-4 mb-8">
+
+                <button 
+
+                  onClick={() => setBookingType('video')}
+
+                  className={`flex-1 flex flex-col items-center justify-center p-4 rounded-lg border transition-all ${bookingType === 'video' ? 'border-slate-900 bg-slate-50' : 'border-gray-100 text-slate-400 hover:border-gray-200'}`}
+
+                >
+
+                  <Video size={24} className={`mb-2 ${bookingType === 'video' ? 'text-slate-900' : 'text-slate-300'}`} />
+
+                  <span className="font-medium text-sm">Video Consult</span>
+
+                  <span className="text-xs mt-1 text-slate-500">€ {doctor.priceVideo}</span>
+
+                </button>
+
+                {doctor.pricePoli && (
+
+                  <button 
+
+                    onClick={() => setBookingType('poli')}
+
+                    className={`flex-1 flex flex-col items-center justify-center p-4 rounded-lg border transition-all ${bookingType === 'poli' ? 'border-slate-900 bg-slate-50' : 'border-gray-100 text-slate-400 hover:border-gray-200'}`}
+
+                  >
+
+                    <MapPin size={24} className={`mb-2 ${bookingType === 'poli' ? 'text-slate-900' : 'text-slate-300'}`} />
+
+                    <span className="font-medium text-sm">Op de Poli</span>
+
+                    <span className="text-xs mt-1 text-slate-500">€ {doctor.pricePoli}</span>
+
+                  </button>
+
+                )}
+
+              </div>
+
+
 
               {/* Date & Time Mockup */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-slate-700 mb-2">Beschikbaarheid</label>
-                <div className="grid grid-cols-3 gap-2 mb-2">
-                  <button className="bg-blue-50 text-blue-700 border border-blue-200 py-2 rounded-lg text-sm font-bold hover:bg-blue-100">09:00</button>
-                  <button className="bg-white text-slate-600 border border-gray-200 py-2 rounded-lg text-sm hover:border-blue-300">11:30</button>
-                  <button className="bg-white text-slate-600 border border-gray-200 py-2 rounded-lg text-sm hover:border-blue-300">14:00</button>
+
+              <div className="mb-8">
+
+                <label className="block text-sm font-medium text-slate-900 mb-3">Beschikbaarheid Vandaag</label>
+
+                <div className="grid grid-cols-3 gap-3 mb-3">
+
+                  <button className="bg-slate-900 text-white py-3 rounded-md text-sm font-medium shadow-lg shadow-slate-900/20">09:00</button>
+
+                  <button className="bg-white text-slate-400 border border-gray-100 py-3 rounded-md text-sm hover:border-slate-300 transition">11:30</button>
+
+                  <button className="bg-white text-slate-400 border border-gray-100 py-3 rounded-md text-sm hover:border-slate-300 transition">14:00</button>
+
                 </div>
-                <div className="text-center">
-                  <a href="#" className="text-xs text-blue-600 font-medium hover:underline">Meer tijden weergeven</a>
-                </div>
+
               </div>
 
-              <button className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-500/20 mb-3">
-                Afspraak Bevestigen
+
+
+              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 rounded-lg transition mb-4">
+
+                Bevestig Afspraak (€ {bookingType === 'video' ? doctor.priceVideo : doctor.pricePoli})
+
               </button>
+
               
-              <p className="text-xs text-center text-slate-400">
-                U betaalt veilig vooraf via iDeal. Gratis annuleren tot 24u van tevoren.
-              </p>
+
+              <div className="flex items-center justify-center text-xs text-slate-400 gap-4">
+
+                <span className="flex items-center"><ShieldCheck size={12} className="mr-1"/> Veilig betalen</span>
+
+                <span className="flex items-center"><Clock size={12} className="mr-1"/> 24u Annuleren</span>
+
+              </div>
+
             </div>
+
           </div>
+
         </div>
 
+
+
       </div>
+
     </div>
+
   );
+
 };
 
-const TestStore = () => (
-  <div className="bg-slate-50 py-12 min-h-screen">
-    <div className="max-w-7xl mx-auto px-4">
-      <div className="text-center max-w-2xl mx-auto mb-12">
-        <h2 className="text-3xl font-bold text-slate-900 mb-4">Medische zelftesten & Laboratorium</h2>
-        <p className="text-slate-600">
-          Bestel een test voor thuis of maak een afspraak bij een prikpost. De uitslag wordt beoordeeld door onze artsen.
+
+
+// --- MAP COMPONENT ---
+
+
+
+const MapSection = () => (
+
+  <div className="bg-slate-50 rounded-2xl p-8 md:p-12 border border-gray-200 mt-16">
+
+    <div className="flex flex-col md:flex-row gap-12">
+
+      <div className="flex-1">
+
+        <h3 className="text-2xl font-serif text-slate-900 mb-4">Landelijke Dekking</h3>
+
+        <p className="text-slate-600 leading-relaxed mb-6">
+
+          Voor bloedafname werken wij samen met gecertificeerde prikpunten door heel Nederland. 
+
+          Na het bestellen van uw test ontvangt u een verwijsbrief waarmee u direct terecht kunt bij een locatie in de buurt.
+
         </p>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {labTests.map(test => (
-          <div key={test.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl transition-all duration-300">
-            <div className="h-48 overflow-hidden">
-              <img src={test.image} alt={test.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            </div>
-            <div className="p-6">
-              <h3 className="font-bold text-lg text-slate-900 mb-2">{test.title}</h3>
-              <p className="text-slate-500 text-sm mb-4 min-h-[40px]">{test.desc}</p>
-              <div className="flex items-center justify-between mt-4">
-                <span className="text-xl font-bold text-blue-900">€ {test.price}</span>
-                <button className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">
-                  Toevoegen
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+        <ul className="space-y-3 mb-8">
 
-      <div className="mt-16 bg-white rounded-2xl p-8 border border-gray-100 flex flex-col md:flex-row items-center justify-between">
-        <div className="mb-6 md:mb-0">
-          <h3 className="text-xl font-bold text-slate-900 mb-2">Uitslag bespreken met een arts?</h3>
-          <p className="text-slate-600">Zodra uw uitslag binnen is, kunt u direct een videoconsult boeken voor uitleg.</p>
-        </div>
-        <button className="bg-blue-50 text-blue-700 px-6 py-3 rounded-xl font-bold hover:bg-blue-100 transition">
-          Meer informatie
+          <li className="flex items-center text-slate-700 font-medium">
+
+            <CheckCircle size={18} className="text-green-500 mr-2" />
+
+            Meer dan 120 locaties
+
+          </li>
+
+          <li className="flex items-center text-slate-700 font-medium">
+
+            <CheckCircle size={18} className="text-green-500 mr-2" />
+
+            Ook 's avonds en in het weekend
+
+          </li>
+
+          <li className="flex items-center text-slate-700 font-medium">
+
+            <CheckCircle size={18} className="text-green-500 mr-2" />
+
+            Uitslag binnen 48 uur in uw dossier
+
+          </li>
+
+        </ul>
+
+        <button className="text-blue-600 font-bold hover:underline flex items-center">
+
+          Zoek dichtstbijzijnde locatie <ChevronRight size={16} />
+
         </button>
+
       </div>
+
+      
+
+      {/* Schematic Map Visualization */}
+
+      <div className="flex-1 relative h-96 bg-white rounded-xl border border-gray-200 shadow-inner overflow-hidden">
+
+        {/* Background Map Placeholder */}
+
+        <div className="absolute inset-0 opacity-10" 
+
+             style={{
+
+               backgroundImage: `url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Blank_map_of_the_Netherlands.svg/800px-Blank_map_of_the_Netherlands.svg.png")`,
+
+               backgroundSize: 'contain',
+
+               backgroundPosition: 'center',
+
+               backgroundRepeat: 'no-repeat'
+
+             }}
+
+        ></div>
+
+        
+
+        {/* Pins */}
+
+        {locations.map((loc, index) => (
+
+          <div 
+
+            key={index}
+
+            className="absolute flex flex-col items-center group cursor-pointer"
+
+            style={{ 
+
+              left: `${loc.x}%`, 
+
+              top: `${loc.y}%`,
+
+              transform: 'translate(-50%, -50%)'
+
+            }}
+
+          >
+
+            <div className="relative">
+
+              <div className="w-4 h-4 bg-blue-600 rounded-full border-2 border-white shadow-md z-10 relative group-hover:bg-blue-800 transition-colors"></div>
+
+              <div className="w-4 h-4 bg-blue-400 rounded-full absolute top-0 left-0 animate-ping opacity-50"></div>
+
+            </div>
+
+            <div className="mt-2 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none shadow-lg">
+
+              {loc.city}
+
+            </div>
+
+          </div>
+
+        ))}
+
+        
+
+        <div className="absolute bottom-4 right-4 bg-white/90 px-3 py-1 rounded text-xs text-slate-500 border border-gray-100 shadow-sm">
+
+          Schematische weergave
+
+        </div>
+
+      </div>
+
     </div>
+
   </div>
+
 );
+
+
+
+const TestStore = () => (
+
+  <div className="bg-white py-12 min-h-screen">
+
+    <div className="max-w-7xl mx-auto px-4">
+
+      <div className="mb-12">
+
+        <h2 className="text-3xl font-light text-slate-900 mb-2">Medische diagnostiek</h2>
+
+        <p className="text-slate-500 font-light text-lg">Professionele testen voor thuisgebruik of bij een prikpost.</p>
+
+      </div>
+
+
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        {labTests.map(test => (
+
+          <div key={test.id} className="bg-white rounded-xl border border-gray-100 overflow-hidden group hover:border-slate-300 transition-all duration-300 flex flex-col">
+
+            <div className="h-56 overflow-hidden bg-slate-50 relative">
+
+              <img src={test.image} alt={test.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+
+              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-900 shadow-sm">
+
+                € {test.price}
+
+              </div>
+
+            </div>
+
+            <div className="p-8 flex-grow flex flex-col">
+
+              <div className="mb-4">
+
+                 <h3 className="font-serif text-xl text-slate-900 mb-2">{test.title}</h3>
+
+                 <p className="text-slate-500 text-sm leading-relaxed">{test.desc}</p>
+
+              </div>
+
+              <button className="mt-auto w-full bg-white border border-slate-200 text-slate-900 py-3 rounded-md text-sm font-medium hover:bg-slate-50 transition flex items-center justify-center group-hover:border-slate-400">
+
+                Toevoegen <ArrowRight size={16} className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              </button>
+
+            </div>
+
+          </div>
+
+        ))}
+
+      </div>
+
+
+
+      <MapSection />
+
+    </div>
+
+  </div>
+
+);
+
+
 
 const Footer = () => (
-  <footer className="bg-slate-900 text-slate-400 py-12">
-    <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div>
-        <div className="flex items-center text-white mb-4">
+
+  <footer className="bg-slate-900 text-slate-400 py-16">
+
+    <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 text-sm font-light">
+
+      <div className="col-span-1 md:col-span-2">
+
+        <div className="flex items-center text-white mb-6">
+
           <Stethoscope size={24} className="mr-2" />
-          <span className="font-bold text-xl">Prive-arts.nl</span>
+
+          <span className="font-semibold text-xl">prive-arts.nl</span>
+
         </div>
-        <p className="text-sm leading-relaxed">
-          Premium gezondheidszorg, toegankelijk voor iedereen. Wij geloven in preventie en snelle diagnostiek.
+
+        <p className="leading-relaxed max-w-sm">
+
+          De nieuwe standaard in persoonlijke zorg. <br/>
+
+          Direct contact met medisch specialisten, zonder verwijzing.
+
         </p>
+
       </div>
+
+      
+
       <div>
-        <h4 className="text-white font-bold mb-4">Diensten</h4>
-        <ul className="space-y-2 text-sm">
-          <li><a href="#" className="hover:text-white">Video Consult</a></li>
-          <li><a href="#" className="hover:text-white">Poli Afspraak</a></li>
-          <li><a href="#" className="hover:text-white">Preventieve Scans</a></li>
-          <li><a href="#" className="hover:text-white">Bloedonderzoek</a></li>
+
+        <h4 className="text-white font-medium mb-6">Navigatie</h4>
+
+        <ul className="space-y-3">
+
+          <li><a href="#" className="hover:text-white transition">Onze Artsen</a></li>
+
+          <li><a href="#" className="hover:text-white transition">Onderzoeken</a></li>
+
+          <li><a href="#" className="hover:text-white transition">Triage Consult</a></li>
+
+          <li><a href="#" className="hover:text-white transition">Inloggen</a></li>
+
         </ul>
+
       </div>
+
       <div>
-        <h4 className="text-white font-bold mb-4">Specialismen</h4>
-        <ul className="space-y-2 text-sm">
-          <li><a href="#" className="hover:text-white">Neurologie</a></li>
-          <li><a href="#" className="hover:text-white">Cardiologie</a></li>
-          <li><a href="#" className="hover:text-white">Dermatologie</a></li>
-          <li><a href="#" className="hover:text-white">Interne Geneeskunde</a></li>
+
+        <h4 className="text-white font-medium mb-6">Juridisch</h4>
+
+        <ul className="space-y-3">
+
+          <li><a href="#" className="hover:text-white transition">Privacyverklaring</a></li>
+
+          <li><a href="#" className="hover:text-white transition">Algemene Voorwaarden</a></li>
+
+          <li><a href="#" className="hover:text-white transition">Voor Artsen</a></li>
+
+          <li><a href="#" className="hover:text-white transition">NEN 7510 Certificering</a></li>
+
         </ul>
+
       </div>
-      <div>
-        <h4 className="text-white font-bold mb-4">Contact</h4>
-        <ul className="space-y-2 text-sm">
-          <li className="flex items-center"><Phone size={14} className="mr-2"/> 020 - 123 45 67</li>
-          <li className="flex items-center"><Menu size={14} className="mr-2"/> info@prive-arts.nl</li>
-          <li className="mt-4 flex gap-2">
-            <div className="w-8 h-8 bg-slate-800 rounded flex items-center justify-center">iDeal</div>
-            <div className="w-8 h-8 bg-slate-800 rounded flex items-center justify-center">Visa</div>
-          </li>
-        </ul>
-      </div>
+
     </div>
-    <div className="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-slate-800 text-xs text-center">
-      &copy; 2024 Prive-arts.nl - Alle artsen zijn BIG-geregistreerd. AVG Compliant.
+
+    <div className="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-slate-800 text-xs flex justify-between">
+
+       <span>&copy; 2024 Prive-arts.nl</span>
+
+       <span>Amsterdam</span>
+
     </div>
+
   </footer>
+
 );
+
+
 
 // --- MAIN APP COMPONENT ---
 
+
+
 const App = () => {
+
   const [activePage, setActivePage] = useState('home');
+
   const [selectedDoctor, setSelectedDoctor] = useState(null);
 
+
+
   const handleDoctorSelect = (doctor) => {
+
     setSelectedDoctor(doctor);
+
     setActivePage('profile');
+
     window.scrollTo(0, 0);
+
   };
+
+
 
   const renderContent = () => {
+
     if (activePage === 'home') {
+
       return (
-        <>
+
+        <div className="bg-white">
+
           <Hero setPage={setActivePage} />
+
+          
+
+          <TriageSection onSelect={handleDoctorSelect} />
+
+          
+
           <Categories />
-          <div className="py-16 bg-slate-50">
+
+          
+
+          <div className="py-20 bg-white">
+
             <div className="max-w-7xl mx-auto px-4">
-              <div className="flex justify-between items-end mb-8">
+
+              <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+
                 <div>
-                   <h2 className="text-3xl font-bold text-slate-900">Uitgelichte Specialisten</h2>
-                   <p className="text-slate-600 mt-2">Direct beschikbaar voor consultatie.</p>
+
+                   <h2 className="text-3xl font-light text-slate-900">Onze Specialisten</h2>
+
+                   <p className="text-slate-500 mt-2 font-light">Expertise op elk vakgebied.</p>
+
                 </div>
-                <button onClick={() => setActivePage('specialists')} className="text-blue-600 font-bold hover:underline">Bekijk alle artsen &rarr;</button>
+
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {doctors.map(doc => (
+
+              
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                {specialists.map(doc => (
+
                   <SpecialistCard key={doc.id} doctor={doc} onSelect={handleDoctorSelect} />
+
                 ))}
+
               </div>
+
+              
+
             </div>
+
           </div>
-        </>
+
+        </div>
+
       );
+
     }
+
+
 
     if (activePage === 'specialists') {
+
       return (
-        <div className="bg-slate-50 min-h-screen py-12">
+
+        <div className="bg-white min-h-screen py-12">
+
           <div className="max-w-7xl mx-auto px-4">
-            <h1 className="text-3xl font-bold text-slate-900 mb-8">Vind uw specialist</h1>
+
+            <h1 className="text-3xl font-light text-slate-900 mb-8">Vind uw specialist</h1>
+
             
-            {/* Filter Bar Mockup */}
-            <div className="bg-white p-4 rounded-xl shadow-sm mb-8 flex flex-col md:flex-row gap-4">
+
+            {/* Filter Bar Cleaner */}
+
+            <div className="bg-white border-b border-gray-100 pb-8 mb-12 flex flex-col md:flex-row gap-4">
+
                <div className="flex-1 relative">
-                 <Search className="absolute left-3 top-3 text-slate-400" size={20} />
-                 <input type="text" placeholder="Zoek op klacht (bijv. migraine) of arts..." className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500" />
+
+                 <Search className="absolute left-0 top-3 text-slate-400" size={20} />
+
+                 <input type="text" placeholder="Zoek op klacht of naam..." className="w-full pl-8 pr-4 py-2 border-b border-gray-200 focus:outline-none focus:border-slate-900 text-lg placeholder:font-light" />
+
                </div>
-               <select className="p-2 border border-gray-200 rounded-lg text-slate-600 bg-white">
-                 <option>Alle Specialismen</option>
-                 <option>Neurologie</option>
-                 <option>Cardiologie</option>
-               </select>
-               <select className="p-2 border border-gray-200 rounded-lg text-slate-600 bg-white">
-                 <option>Beschikbaarheid: Vandaag</option>
-               </select>
+
+               <div className="flex gap-4">
+
+                 <select className="py-2 bg-transparent border-b border-gray-200 text-slate-600 focus:outline-none focus:border-slate-900 cursor-pointer">
+
+                   <option>Alle Specialismen</option>
+
+                   <option>Neurologie</option>
+
+                   <option>Cardiologie</option>
+
+                   <option>Dermatologie</option>
+
+                   <option>Orthopedie</option>
+
+                 </select>
+
+               </div>
+
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {doctors.map(doc => (
+
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+              {specialists.map(doc => (
+
                 <SpecialistCard key={doc.id} doctor={doc} onSelect={handleDoctorSelect} />
+
               ))}
+
             </div>
+
           </div>
+
         </div>
+
       );
+
     }
+
+
 
     if (activePage === 'profile' && selectedDoctor) {
-      return <DoctorProfile doctor={selectedDoctor} onBack={() => setActivePage('specialists')} />;
+
+      return <DoctorProfile doctor={selectedDoctor} onBack={() => setActivePage('home')} />;
+
     }
+
+
 
     if (activePage === 'tests') {
+
       return <TestStore />;
+
     }
+
   };
 
+
+
   return (
-    <div className="font-sans text-slate-900 bg-white min-h-screen flex flex-col">
+
+    <div className="font-sans text-slate-900 bg-white min-h-screen flex flex-col antialiased selection:bg-blue-100 selection:text-blue-900">
+
       <Navigation setPage={setActivePage} />
+
       <main className="flex-grow">
+
         {renderContent()}
+
       </main>
+
       <Footer />
+
     </div>
+
   );
+
 };
 
-export default App;
 
+
+export default App;
