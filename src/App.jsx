@@ -998,27 +998,21 @@ const MapSection = () => (
 
       
 
-      {/* Schematic Map Visualization */}
+      {/* Map Visualization */}
 
       <div className="flex-1 relative h-96 bg-white rounded-xl border border-gray-200 shadow-inner overflow-hidden">
 
-        {/* Background Map Placeholder */}
+        {/* Netherlands Map Image */}
 
-        <div className="absolute inset-0 opacity-10" 
+        <img 
 
-             style={{
+          src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800&h=600"
 
-               backgroundImage: `url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Blank_map_of_the_Netherlands.svg/800px-Blank_map_of_the_Netherlands.svg.png")`,
+          alt="Kaart van Nederland met prikpost locaties"
 
-               backgroundSize: 'contain',
+          className="absolute inset-0 w-full h-full object-cover opacity-90"
 
-               backgroundPosition: 'center',
-
-               backgroundRepeat: 'no-repeat'
-
-             }}
-
-        ></div>
+        />
 
         
 
