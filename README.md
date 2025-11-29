@@ -62,18 +62,28 @@ prive-arts/
 - `npm run build` - Build voor productie
 - `npm run preview` - Preview productie build lokaal
 
-## GitHub Pages Deployment
+## Cloudflare Pages Deployment
 
-De website wordt automatisch gedeployed naar GitHub Pages via GitHub Actions wanneer er code naar de `main` branch wordt gepusht.
+De website is geconfigureerd voor deployment naar Cloudflare Pages. Zie [cloudflare-pages.md](./cloudflare-pages.md) voor gedetailleerde stap-voor-stap instructies.
 
-**Om GitHub Pages in te schakelen:**
+**Snelle Setup:**
 
-1. Ga naar de repository settings op GitHub: https://github.com/benkogerrie/privearts/settings/pages
-2. Onder "Source" selecteer "GitHub Actions"
-3. De workflow zal automatisch draaien bij elke push naar `main`
-4. Na enkele minuten is de site live op: `https://benkogerrie.github.io/privearts/`
+1. Ga naar https://dash.cloudflare.com en log in
+2. Klik op **"Pages"** → **"Create a project"** → **"Connect to Git"**
+3. Selecteer **GitHub** en kies de repository `benkogerrie/privearts`
+4. Build instellingen:
+   - **Framework preset**: Vite
+   - **Build command**: `npm run build`
+   - **Build output directory**: `dist`
+5. Klik **"Save and Deploy"**
 
-**Let op:** De eerste keer dat de workflow draait, moet je mogelijk GitHub Pages handmatig activeren in de repository settings.
+Na enkele minuten is je site live op een `*.pages.dev` URL!
+
+**Voordelen:**
+- ✅ Gratis hosting met onbeperkte bandbreedte
+- ✅ Wereldwijde CDN voor snelle laadtijden
+- ✅ Automatische HTTPS
+- ✅ Automatische deployments bij elke Git push
 
 ## Licentie
 
