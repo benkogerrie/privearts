@@ -62,6 +62,19 @@ prive-arts/
 - `npm run build` - Build voor productie
 - `npm run preview` - Preview productie build lokaal
 
+## GitHub Pages Deployment
+
+De website wordt automatisch gedeployed naar GitHub Pages via GitHub Actions wanneer er code naar de `main` branch wordt gepusht.
+
+**Om GitHub Pages in te schakelen:**
+
+1. Ga naar de repository settings op GitHub: https://github.com/benkogerrie/privearts/settings/pages
+2. Onder "Source" selecteer "GitHub Actions"
+3. De workflow zal automatisch draaien bij elke push naar `main`
+4. Na enkele minuten is de site live op: `https://benkogerrie.github.io/privearts/`
+
+**Let op:** De eerste keer dat de workflow draait, moet je mogelijk GitHub Pages handmatig activeren in de repository settings.
+
 ## Licentie
 
 © 2024 Prive-arts.nl
