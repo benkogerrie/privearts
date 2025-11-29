@@ -346,7 +346,7 @@ const labTests = [
 
     desc: "Volledig anonieme thuistest voor Chlamydia, Gonorroe en Syfilis.",
 
-    image: "https://images.unsplash.com/photo-1582719478250-c89c14d47387?auto=format&fit=crop&q=80&w=600&h=400"
+    image: "https://images.unsplash.com/photo-1584036561566-b93a945c3e16?auto=format&fit=crop&q=80&w=600&h=400"
 
   },
 
