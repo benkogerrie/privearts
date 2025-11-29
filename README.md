@@ -1,5 +1,7 @@
 # Prive-arts.nl Website
 
+🌐 **[Live Site](https://privearts.pages.dev)** | 📦 [GitHub Repository](https://github.com/benkogerrie/privearts)
+
 Een moderne React website voor Prive-arts.nl - een platform voor exclusieve medische zorg met directe toegang tot specialisten.
 
 ## Features
@@ -61,6 +63,12 @@ prive-arts/
 - `npm run dev` - Start development server
 - `npm run build` - Build voor productie
 - `npm run preview` - Preview productie build lokaal
+
+## 🌐 Live Site
+
+**De website is live op:** [https://privearts.pages.dev](https://privearts.pages.dev)
+
+*(Vervang deze URL met je eigen Cloudflare Pages URL als deze anders is)*
 
 ## Cloudflare Pages Deployment
 
