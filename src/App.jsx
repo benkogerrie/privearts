@@ -290,7 +290,7 @@ const labTests = [
 
     desc: "Complete check van 25 waarden inclusief nier- en leverfunctie en bloedsuiker.",
 
-    image: "https://images.unsplash.com/photo-1579165466741-7f35a4755657?auto=format&fit=crop&q=80&w=600"
+    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&q=80&w=600&h=400"
 
   },
 
@@ -304,7 +304,7 @@ const labTests = [
 
     desc: "Essentieel bij vermoeidheid. Check op o.a. Vitamine D, B12, IJzer en Magnesium.",
 
-    image: "https://images.unsplash.com/photo-1600091392652-32b5d4df4d2d?auto=format&fit=crop&q=80&w=600"
+    image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&q=80&w=600&h=400"
 
   },
 
@@ -318,7 +318,7 @@ const labTests = [
 
     desc: "Inzicht in uw risicoprofiel. HDL, LDL, triglyceriden en glucose.",
 
-    image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&q=80&w=600"
+    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=600&h=400"
 
   },
 
@@ -332,7 +332,7 @@ const labTests = [
 
     desc: "Uitgebreide screening op o.a. Oestrogeen, Progesteron, FSH en LH.",
 
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600"
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=600&h=400"
 
   },
 
@@ -346,7 +346,7 @@ const labTests = [
 
     desc: "Volledig anonieme thuistest voor Chlamydia, Gonorroe en Syfilis.",
 
-    image: "https://images.unsplash.com/photo-1584036561566-b93a945c3e16?auto=format&fit=crop&q=80&w=600"
+    image: "https://images.unsplash.com/photo-1582719478250-c89c14d47387?auto=format&fit=crop&q=80&w=600&h=400"
 
   },
 
@@ -360,7 +360,7 @@ const labTests = [
 
     desc: "Test op de 30 meest voorkomende allergenen (pollen, huisdieren, voeding).",
 
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=600"
+    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&q=80&w=600&h=400"
 
   }
 
