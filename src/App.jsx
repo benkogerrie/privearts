@@ -68,7 +68,7 @@ const triageDoctor = {
 
     title: "Huisarts & Triage Specialist",
 
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600&h=600",
+    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
 
     specialties: ["Algemene klachten", "Second opinion", "Doorverwijzing"],
 
@@ -102,7 +102,7 @@ const specialists = [
 
     title: "Neuroloog",
 
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=600&h=600",
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
 
     specialties: ["Migraine", "Hernia", "Duizeligheid"],
 
@@ -132,7 +132,7 @@ const specialists = [
 
     title: "Cardioloog",
 
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600&h=600",
+    image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
 
     specialties: ["Hartritmestoornissen", "Preventieve screening", "Hoge bloeddruk"],
 
@@ -162,7 +162,7 @@ const specialists = [
 
     title: "Dermatoloog",
 
-    image: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&q=80&w=600&h=600",
+    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
 
     specialties: ["Eczeem", "Moedervlek check", "Acne"],
 
@@ -192,7 +192,7 @@ const specialists = [
 
     title: "Orthopeed",
 
-    image: "https://images.unsplash.com/photo-1612531386530-97286d97c2d2?auto=format&fit=crop&q=80&w=600&h=600",
+    image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
 
     specialties: ["Sportblessures", "Knieklachten", "Schouder"],
 
@@ -222,7 +222,7 @@ const specialists = [
 
     title: "KNO-Arts",
 
-    image: "https://images.unsplash.com/photo-1651008325513-37603395d852?auto=format&fit=crop&q=80&w=600&h=600",
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
 
     specialties: ["Tinnitus", "Slaapapneu", "Holteontsteking"],
 
@@ -252,7 +252,7 @@ const specialists = [
 
     title: "Gynaecoloog",
 
-    image: "https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?auto=format&fit=crop&q=80&w=600&h=600",
+    image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
 
     specialties: ["Hormonale klachten", "Overgang", "Vruchtbaarheid"],
 
