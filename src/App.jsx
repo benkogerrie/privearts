@@ -1006,11 +1006,11 @@ const MapSection = () => (
 
         <img 
 
-          src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800&h=600"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Blank_map_of_the_Netherlands.svg/1200px-Blank_map_of_the_Netherlands.svg.png"
 
           alt="Kaart van Nederland met prikpost locaties"
 
-          className="absolute inset-0 w-full h-full object-cover opacity-90"
+          className="absolute inset-0 w-full h-full object-contain bg-slate-50 p-4"
 
         />
 
