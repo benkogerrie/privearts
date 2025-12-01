@@ -514,11 +514,11 @@ const Hero = ({ onSelectTriage }) => (
 
 const TriageSection = ({ onSelect }) => (
 
-  <div className="max-w-5xl mx-auto px-4 -mt-12 relative z-10 mb-20">
+  <div className="max-w-7xl mx-auto px-4 -mt-12 relative z-10 mb-20">
 
     <div className="bg-slate-900 text-white rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
 
-      <div className="md:w-2/5 relative h-64 md:h-auto group">
+      <div className="md:w-2/5 relative h-80 md:h-auto min-h-[400px] bg-slate-50 flex items-center justify-center group">
 
         <img 
 
@@ -526,13 +526,13 @@ const TriageSection = ({ onSelect }) => (
 
           alt="Triage Arts" 
 
-          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
 
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent md:bg-gradient-to-r" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent md:bg-gradient-to-r opacity-60" />
 
-        <div className="absolute bottom-6 left-6">
+        <div className="absolute bottom-6 left-6 z-10">
 
            <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider mb-2 inline-block border border-white/10">
 
@@ -564,13 +564,13 @@ const TriageSection = ({ onSelect }) => (
 
             onClick={() => onSelect(triageDoctor)}
 
-            className="bg-white text-slate-900 px-6 py-3 rounded-md font-medium hover:bg-slate-100 transition flex items-center justify-center shadow-lg shadow-white/10"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/40 transform hover:scale-105"
 
           >
 
             Start Triage Consult (€45)
 
-            <ArrowRight size={18} className="ml-2" />
+            <ArrowRight size={20} className="ml-2" />
 
           </button>
 
