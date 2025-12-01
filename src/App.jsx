@@ -634,23 +634,22 @@ const Categories = () => (
 
 const SpecialistCard = ({ doctor, onSelect }) => (
 
-  <div className="group bg-white rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-500 border border-gray-100 flex flex-col h-full">
+  <div className="group bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all duration-500 border border-gray-100 flex flex-col md:flex-row h-full">
 
-    <div className="aspect-[4/3] overflow-hidden relative">
-
-      <img src={doctor.image} alt={doctor.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-
-        <span className="text-white font-medium flex items-center">Bekijk profiel <ArrowRight size={16} className="ml-2"/></span>
-
-      </div>
-
+    {/* Foto links - klikbaar */}
+    <div 
+      onClick={() => onSelect(doctor)}
+      className="w-full md:w-1/3 md:min-w-[200px] h-64 md:h-auto overflow-hidden relative cursor-pointer bg-slate-50 flex items-center justify-center"
+    >
+      <img 
+        src={doctor.image} 
+        alt={doctor.name} 
+        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" 
+      />
     </div>
 
-    
-
-    <div className="p-6 flex-grow flex flex-col">
+    {/* Tekst rechts */}
+    <div className="flex-1 p-6 flex flex-col">
 
       <p className="text-blue-600 font-bold text-xs uppercase tracking-wider mb-2">{doctor.title}</p>
 
@@ -1286,7 +1285,7 @@ const App = () => {
 
               
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
                 {specialists.map(doc => (
 
@@ -1356,7 +1355,7 @@ const App = () => {
 
 
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
               {specialists.map(doc => (
 
