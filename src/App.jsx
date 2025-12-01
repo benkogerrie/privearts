@@ -68,7 +68,7 @@ const triageDoctor = {
 
     title: "Huisarts & Triage Specialist",
 
-    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
+    image: "/images/doctors/triage-jansen.png",
 
     specialties: ["Algemene klachten", "Second opinion", "Doorverwijzing"],
 
@@ -102,7 +102,7 @@ const specialists = [
 
     title: "Neuroloog",
 
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
+    image: "/images/doctors/neuroloog-vandermeer.png",
 
     specialties: ["Migraine", "Hernia", "Duizeligheid"],
 
@@ -132,7 +132,7 @@ const specialists = [
 
     title: "Cardioloog",
 
-    image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
+    image: "/images/doctors/cardioloog-devries.png",
 
     specialties: ["Hartritmestoornissen", "Preventieve screening", "Hoge bloeddruk"],
 
@@ -162,7 +162,7 @@ const specialists = [
 
     title: "Dermatoloog",
 
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
+    image: "/images/doctors/dermatoloog-bakker.png",
 
     specialties: ["Eczeem", "Moedervlek check", "Acne"],
 
@@ -192,7 +192,7 @@ const specialists = [
 
     title: "Orthopeed",
 
-    image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
+    image: "/images/doctors/orthopeed-vandenberg.png",
 
     specialties: ["Sportblessures", "Knieklachten", "Schouder"],
 
@@ -222,7 +222,7 @@ const specialists = [
 
     title: "KNO-Arts",
 
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
+    image: "/images/doctors/kno-hendriks.png",
 
     specialties: ["Tinnitus", "Slaapapneu", "Holteontsteking"],
 
@@ -252,7 +252,7 @@ const specialists = [
 
     title: "Gynaecoloog",
 
-    image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=600&h=600&facepad=2",
+    image: "/images/doctors/gynaecoloog-willems.png",
 
     specialties: ["Hormonale klachten", "Overgang", "Vruchtbaarheid"],
 
